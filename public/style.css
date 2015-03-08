@@ -1,0 +1,90 @@
+.wholething {
+  width: 60%;
+  max-width: 817.5px;
+  margin: 0px auto;
+  background-color: #FFFFFF;
+  padding: 0px;
+}
+
+.blackbehindnav {
+  background-color: #000000; 
+  width: 100%;
+  margin: 0px auto;
+  height:4px;
+}
+
+#contents {
+  margin-top: 0px;
+  width: 100%;
+  max-width: 784px;
+  margin: 0px auto;
+  background-color: #FFFFFF;
+  padding: 0px 15px 15px 15px;
+/*  border-left: 1px solid;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+  border-color: #606060;*/
+}
+.nav {
+  width: 100%;
+  margin: 0px auto;
+}
+
+
+nav ul {
+  list-style-type: none;
+  padding: 0px;
+  
+}
+
+/*#contents {
+  width: 100%;
+  margin: 0px auto;
+  max-width: 8px;
+}*/
+
+nav li {
+  float: left;
+  padding: 10px 30px 10px;
+  background-color: #B0B0B0;
+  color: #000000;
+  border-left: 1px solid;
+  border-right: 1px solid;
+  border-top: 1px solid;
+  border-color: #606060;
+  border-radius: 6px 6px 0px 0px;
+  
+}
+
+nav li #norightpadding {
+  float: left;
+  padding: 10px 0px 10px;
+  background-color: #B0B0B0;
+  color: #000000;
+  border-left: 1px solid;
+  border-right: 1px solid;
+  border-top: 1px solid;
+  border-color: #606060;
+  border-radius: 6px 6px 0px 0px;
+}
+
+nav li a{
+  text-decoration: none;
+}
+
+nav li a:link{
+  color: #000000;
+}
+
+nav li a:visited{
+  color: #000000;
+}
+
+nav li a:hover{
+  color: #000000;
+}
+
+
+body {
+  background-color: #000000;
+}
