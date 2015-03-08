@@ -47,7 +47,25 @@ class Product
     @general_info = options["general_info"]
     @where_to_buy = options["where_to_buy"]
     @technical_specs = options["technical_specs"]
-    @errors = {"general_info"=>[], "where_to_buy"=>[], "technical_specs"=>[]} #key would be "general_info", value would be array of error messages depending on specific error
+    @errors = {"general_info"=>[], "where_to_buy"=>[], "technical_specs"=>[]} 
+
+    #ERROR CHECKS
+    
+    Product.all.each do |hash|
+      if @general_info == hash["general_info"]
+        @errors["general_info"] << "Hmm, looks like that product has already been added to inventory. Please add a different product or edit the existing product."
+      end
+    end
+    
+    #need to work on because default for form data is a string
+    
+    if @where_to_buy.is_a?(Integer)
+      @errors["where_to_buy"] << "Looks like you entered a number for the 'Where it's sold' field. Please enter the names of the location, not just the number."
+    end
+    
+    if @general_info.is_a?(Integer)
+      @errors["general_info"] << "Looks like you entered a number for the 'General information' field. Please enter one to two sentences describing the product."
+    end
     
   end
   
@@ -170,6 +188,26 @@ class Product
     }
   end
   
+  # Public: to_hash_errors
+  # 
+  # Returns a hash of the errors
+  #
+  # Parameters:
+  # None
+  #
+  # Returns:
+  # A hash
+  #
+  # State Changes:
+  # None  
+  
+  def to_hash_errors
+    {
+      general_info: general_info,
+      where_to_buy: where_to_buy,
+      technical_specs: technical_specs      
+    }
+  end
   # Public: self.all
   # 
   # Returns an array of hashes of all the records

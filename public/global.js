@@ -2,9 +2,9 @@
 // MAIN SCRIPT //
 /////////////////
 
-window.onload = function() {
-  tabFunction()
+window.onload = function() { 
   resetHiddenDivs()
+  tabFunction()
 }
 
 ///////////////
@@ -22,6 +22,7 @@ var addProduct = function() {
                                                                       
 var productResults = function(eventObject) {                                          
   var product = JSON.parse(this.response);
+     //says undefined when error, so some issue with parsing this.response? don't need to parse? not sure.
   document.getElementById("create_result").style.display = "block";
   
   if (product.worked === "yes") {
@@ -34,7 +35,27 @@ var productResults = function(eventObject) {
   }
   
   if (product.worked != "yes") {
-    document.getElementById("create_message").innerHTML = product;
+    document.getElementById("create_message").innerHTML = this.response;
+    //Can separate this out into function with argument of tech_spec vs. general_info etc.
+    
+    for (i = 0; i < product.technical_specs.length; i ++){
+      var errors = document.createElement("p");
+      var techSpecError = product.technical_specs[i];
+      errors.innerHTML = techSpecError;
+      document.getElementById("create_message").appendChild(errors);
+    }
+    for (i = 0; i < product.general_info.length; i ++){
+      var errors = document.createElement("p");
+      var genInfoError = product.general_info[i] + "<br>";
+      errors.innerHTML = genInfoError;
+      document.getElementById("create_message").appendChild(errors);
+    }
+    for (i = 0; i < product.where_to_buy.length; i ++){
+      var errors = document.createElement("p");
+      var whereBuyError = product.technical_specs[i] + "<br>";
+      errors.innerHTML = whereBuyError;
+      document.getElementById("create_message").appendChild(errors);
+    }
   }
 }
 

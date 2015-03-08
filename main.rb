@@ -15,7 +15,7 @@ post "/create" do
   new_product = Product.new({"general_info"=>"#{params["general_info"]}", 
                             "technical_specs"=>"#{params["technical_specs"]}",
                             "where_to_buy"=>"#{params["where_to_buy"]}"})
-                            binding.pry
+                           
                             
   if new_product.has_errors? == true
     np_hash = (new_product.errors).to_json # will need to format at some point
