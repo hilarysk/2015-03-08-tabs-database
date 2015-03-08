@@ -52,7 +52,7 @@ class Product
   end
   
   
-  # Public: self.has_errors?
+  # Public: has_errors?
   #
   # Sees if there are errors
   #
@@ -65,7 +65,7 @@ class Product
   # State Changes:
   # None
   
-  def self.has_errors?
+  def has_errors?
     @errors.keep_if do |key, value|
       value != []
     end

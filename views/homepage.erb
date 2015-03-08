@@ -32,26 +32,27 @@
 
     <div id="create" class="tab_content">
       <h1>ADD NEW PRODUCT</h1>
-       <p>Please enter the new product's details below:</p>
+       <div id="newProductFormDiv"><p>Please enter the new product's details below:</p>
 
        <form action="javascript:void(0)" id="addProductForm">
   
          <p><strong>General information:</strong></p></p>
-         <textarea maxlength="300" autofocus required name="general_info" placeholder="(Maximum of 300 characters.)"></textarea>
+         <textarea maxlength="300" form="addProductForm" autofocus required name="general_info" placeholder="(Maximum of 300 characters.)"></textarea>
          <br><br>
 
          <p><strong>Where it's sold:</strong></p>
-         <textarea maxlength="300" required name="where_to_buy" placeholder="(Maximum of 300 characters.)"></textarea>
+         <textarea maxlength="300" form="addProductForm" required name="where_to_buy" placeholder="(Maximum of 300 characters.)"></textarea>
          <br><br>
   
          <p><strong>Technical specifications:</strong></p>
-         <textarea maxlength="300" required name="technical_specs" placeholder="(Maximum of 300 characters.)"></textarea>
+         <textarea maxlength="300" id="testingTextArea" form="addProductForm" required name="technical_specs" placeholder="(Maximum of 300 characters.)"></textarea>
          <br><br>
-         <button class="button" onclick="addProduct()">Add product</button></a> 
+         <button onclick="addProduct()">Add product</button> 
        </form>
+     </div>
        
        <div id="create_result" display="none">
-         <p><strong><%= @message %></strong></p>
+         <p id="create_message"></p>
          <div id="product_info" display="none">
            <ul>
              <li><strong>General information:</strong> <span id="general_info"></span></li>

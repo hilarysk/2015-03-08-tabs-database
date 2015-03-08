@@ -10,17 +10,17 @@ window.onload = function() {
 ///////////////
 // FUNCTIONS //
 ///////////////
-
-var addProduct = function() {
-  var productInfo = document.getElementById("addProductForm");
-  var req = new XMLHttpRequest;
-  req.open("post", "http://localhost:4567/create");
+                                                                      
+var addProduct = function() {                                         
+  var productInfo = document.getElementById("addProductForm");         
+  var req = new XMLHttpRequest;                         
+  req.open("post", "http://localhost:4567/create");                    
   req.send(new FormData(productInfo));
-  req.addEventListener("load", productResults);  
+  req.addEventListener("load", productResults);                       
 }
-
-
-var productResults = function(eventObject) {
+                                                                      
+                                                                      
+var productResults = function(eventObject) {                                          
   var product = JSON.parse(this.response);
   document.getElementById("create_result").style.display = "block";
   
@@ -29,6 +29,12 @@ var productResults = function(eventObject) {
     document.getElementById("technical_specs").innerHTML = product.technical_specs;
     document.getElementById("general_info").innerHTML = product.general_info;
     document.getElementById("where_to_buy").innerHTML = product.where_to_buy;
+    document.getElementById("create_message").innerHTML = "Congratulations! Your new product was successfully added.";
+    document.getElementById("newProductFormDiv").style.display = "none";
+  }
+  
+  if (product.worked != "yes") {
+    document.getElementById("create_message").innerHTML = product;
   }
 }
 
@@ -36,6 +42,8 @@ var productResults = function(eventObject) {
 var resetHiddenDivs = function() {
   document.getElementById("product_info").style.display = "none";
   document.getElementById("create_result").style.display = "none";
+  document.getElementById("newProductFormDiv").style.display = "block";
+  
   
   //add more as necessary, like from edit
 }
