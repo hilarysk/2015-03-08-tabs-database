@@ -50,6 +50,32 @@ class Product
     @errors = {"general_info"=>[], "where_to_buy"=>[], "technical_specs"=>[]} #key would be "general_info", value would be array of error messages depending on specific error
     
   end
+  
+  
+  # Public: self.has_errors?
+  #
+  # Sees if there are errors
+  #
+  # Parameters:
+  # None
+  #
+  # Returns:
+  # True or false
+  #
+  # State Changes:
+  # None
+  
+  def self.has_errors?
+    @errors.keep_if do |key, value|
+      value != []
+    end
+
+    if @errors.length == 0
+        return false
+    else
+        return true
+    end
+  end
       
   # Public: insert
   # Inserts the information collected in initialize into the proper table

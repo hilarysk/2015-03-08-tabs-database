@@ -1,4 +1,49 @@
+/////////////////
+// MAIN SCRIPT //
+/////////////////
+
 window.onload = function() {
+  tabFunction()
+  resetHiddenDivs()
+}
+
+///////////////
+// FUNCTIONS //
+///////////////
+
+var addProduct = function() {
+  var productInfo = document.getElementById("addProductForm");
+  var req = new XMLHttpRequest;
+  req.open("post", "http://localhost:4567/create");
+  req.send(new FormData(productInfo));
+  req.addEventListener("load", productResults);  
+}
+
+
+var productResults = function(eventObject) {
+  var product = JSON.parse(this.response);
+  document.getElementById("create_result").style.display = "block";
+  
+  if (product.worked === "yes") {
+    document.getElementById("product_info").style.display = "block";
+    document.getElementById("technical_specs").innerHTML = product.technical_specs;
+    document.getElementById("general_info").innerHTML = product.general_info;
+    document.getElementById("where_to_buy").innerHTML = product.where_to_buy;
+  }
+}
+
+
+var resetHiddenDivs = function() {
+  document.getElementById("product_info").style.display = "none";
+  document.getElementById("create_result").style.display = "none";
+  
+  //add more as necessary, like from edit
+}
+
+
+//Definitely can be refactored
+
+var tabFunction = function(){
   
   //CREATE VARS FOR NAV LINKS
  
@@ -21,15 +66,16 @@ window.onload = function() {
   
   //SET VARS FOR EACH TAB CONTENT
   
+  var welcome = document.querySelector("#welcome");
   var viewTab = document.querySelector("#view");
   var createTab = document.querySelector("#create");
   var editTab = document.querySelector("#edit");
   var deleteTab = document.querySelector("#delete");
   
-  //START OUT WITH VIEW TAB SHOWING
+  //START OUT WITH WELCOME SHOWING
   
-  viewLI.style.backgroundColor = "#FFFFFF";
-  viewTab.style.display = "inline-block";
+  welcome.style.display = "inline-block";
+  viewTab.style.display = "none";
   editTab.style.display = "none";
   deleteTab.style.display = "none";
   createTab.style.display = "none";
@@ -43,6 +89,7 @@ window.onload = function() {
     editTab.style.display = "none";
     createTab.style.display = "none";
     deleteTab.style.display = "none";
+    welcome.style.display = "none";
     
     viewLI.style.backgroundColor = "#FFFFFF";    
     editLI.style.backgroundColor = "#B0B0B0";   
@@ -52,10 +99,13 @@ window.onload = function() {
   
   //create
   createLink.onclick = function(){
+    resetHiddenDivs()
+    
     createTab.style.display = "inline-block";
     editTab.style.display = "none";
     deleteTab.style.display = "none";
     viewTab.style.display = "none";
+    welcome.style.display = "none";
 
     createLI.style.backgroundColor = "#FFFFFF"; 
     editLI.style.backgroundColor = "#B0B0B0";
@@ -70,6 +120,7 @@ window.onload = function() {
     createTab.style.display = "none";
     deleteTab.style.display = "none";
     viewTab.style.display = "none";
+    welcome.style.display = "none";
     
     editLI.style.backgroundColor = "#FFFFFF";
     deleteLI.style.backgroundColor = "#B0B0B0";   
@@ -84,6 +135,7 @@ window.onload = function() {
     editTab.style.display = "none";
     createTab.style.display = "none";
     viewTab.style.display = "none";
+    welcome.style.display = "none";
     
     deleteLI.style.backgroundColor = "#FFFFFF";    
     editLI.style.backgroundColor = "#B0B0B0";   

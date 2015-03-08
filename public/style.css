@@ -10,7 +10,7 @@
   background-color: #000000; 
   width: 100%;
   margin: 0px auto;
-  height:4px;
+  height: 37px;
 }
 
 #contents {
@@ -25,6 +25,14 @@
   border-bottom: 1px solid;
   border-color: #606060;*/
 }
+
+textarea {
+  width: 100%;
+  max-width: 800px;
+  min-width: 200px;
+}
+
+
 .nav {
   width: 100%;
   margin: 0px auto;
@@ -88,3 +96,37 @@ nav li a:hover{
 body {
   background-color: #000000;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.button {
+/*goes here*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

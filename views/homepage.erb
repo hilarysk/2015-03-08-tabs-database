@@ -13,16 +13,57 @@
   </div>
     
   <div id="contents"> 
+    
+    <div id="welcome" class="tab_content">
+      <h1>Welcome!</h1>
+      <p>To manage inventory, please click one of the tabs above.</p>
+    </div>
 
     <div id="view" class="tab_content">
-      <h1>VIEW PRODUCTS</h>
-      <p>stuff that would go on erb for edit goes here</p>
+      <h1>VIEW PRODUCTS</h1>
+      <% @all_products.each do |product| %>
+      <ul>
+        <li><strong>Product information:</strong> <%= product["general_info"] %></li>
+        <li><strong>Where it's sold:</strong> <%= product["where_to_buy"] %></li>
+        <li><strong>Technical specs:</strong> <%= product["technical_specs"] %></li>
+      </ul>
+      <% end %>
     </div>
 
     <div id="create" class="tab_content">
       <h1>ADD NEW PRODUCT</h1>
-      <p>stuff that would go on erb for create goes here</p>
+       <p>Please enter the new product's details below:</p>
+
+       <form action="javascript:void(0)" id="addProductForm">
+  
+         <p><strong>General information:</strong></p></p>
+         <textarea maxlength="300" autofocus required name="general_info" placeholder="(Maximum of 300 characters.)"></textarea>
+         <br><br>
+
+         <p><strong>Where it's sold:</strong></p>
+         <textarea maxlength="300" required name="where_to_buy" placeholder="(Maximum of 300 characters.)"></textarea>
+         <br><br>
+  
+         <p><strong>Technical specifications:</strong></p>
+         <textarea maxlength="300" required name="technical_specs" placeholder="(Maximum of 300 characters.)"></textarea>
+         <br><br>
+         <button class="button" onclick="addProduct()">Add product</button></a> 
+       </form>
+       
+       <div id="create_result" display="none">
+         <p><strong><%= @message %></strong></p>
+         <div id="product_info" display="none">
+           <ul>
+             <li><strong>General information:</strong> <span id="general_info"></span></li>
+             <li><strong>Where it's sold:</strong> <span id="where_to_buy"></span></li>
+             <li><strong>Technical specifications:</strong> <span id="technical_specs"></span></li>
+           </ul>
+         </div>
+       </div>
+       
     </div>
+    
+    
 
     <div id="edit" class="tab_content">
       <h1>EDIT A PRODUCT</h1>
@@ -31,8 +72,8 @@
     </div>
 
     <div id="delete" class="tab_content">
-      <h1>DELETE A PRODUCT</h>
-      <p>stuff that would go on erb for edit goes here</p>
+      <h1>DELETE A PRODUCT</h1>
+      <p>stuff that would go on erb for delete goes here</p>
     </div>
 
   </div>
