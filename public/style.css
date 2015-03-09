@@ -66,7 +66,7 @@ nav li {
   
 }
 
-nav li #norightpadding {
+nav li .norightpadding {
   float: left;
   padding: 10px 0px 10px;
   background-color: #B0B0B0;

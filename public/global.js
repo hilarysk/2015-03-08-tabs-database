@@ -32,7 +32,18 @@ var addProduct = function(secondFunction) {
   req.open("post", "http://localhost:4567/create");                    
   req.send(new FormData(productInfo));
   req.addEventListener("load", secondFunction);                       
-}                                                                      
+}    
+
+var findErrorMessages = function(key, parsedResponse) {
+  if (parsedResponse[key] != undefined){
+    for (i = 0; i < parsedResponse[key].length; i++){
+      var errors = document.createElement("p");
+      var specificError = parsedResponse[key][i];
+      errors.innerHTML = specificError;
+      document.getElementById("create_message").appendChild(errors);
+    }
+  }
+}                                                                  
                                                                       
 var productResults = function(eventObject) {                                         
   var product = JSON.parse(this.response);
@@ -51,36 +62,13 @@ var productResults = function(eventObject) {
   if (product.worked != "yes") {
     document.getElementById("create_message").innerHTML = "<p class='errornote'><br><strong>ERROR</strong></p>"
     
-    //Can separate this out into function with argument of tech_spec vs. general_info etc.
-    if (product["technical_specs"] != undefined){
-      for (i = 0; i < product["technical_specs"].length; i++){
-        var errors = document.createElement("p");
-        var techSpecError = product["technical_specs"][i];
-        errors.innerHTML = techSpecError;
-        document.getElementById("create_message").appendChild(errors);
-      }
-    }
-    
-    if (product["general_info"] != undefined) {
-      for (i = 0; i < product["general_info"].length; i++){
-        var errors = document.createElement("p");
-        var genInfoError = product["general_info"][i] + "<br>";
-        errors.innerHTML = genInfoError;
-        document.getElementById("create_message").appendChild(errors);
-      }
-    }
-    
-    if (product["where_to_buy"] != undefined) {
-      for (i = 0; i < product["where_to_buy"].length; i++){
-        var errors = document.createElement("p");
-        var whereBuyError = product["where_to_buy"][i] + "<br>";
-        errors.innerHTML = whereBuyError;
-        document.getElementById("create_message").appendChild(errors);
-      }
-    }
+    findErrorMessages("technical_specs", product);
+    findErrorMessages("general_info", product);
+    findErrorMessages("where_to_buy", product);
   }
 }
 
+//RESETS VALUES TO DEFAULT
 
 var resetHiddenDivs = function() {
   document.getElementById("product_info").style.display = "none";
@@ -94,9 +82,9 @@ var resetHiddenDivs = function() {
   document.getElementById("selectDelete").innerHTML = "";
   getAllProductInfo(formatAllProductInfo);
   document.getElementById("allProductsGoHere").innerHTML = "";
-   
-  
 }
+
+//XHR FOR ALL VIEW OF ALL PRODUCTS IN DATABASE
 
 var getAllProductInfo = function(secondFunction) {
   var req = new XMLHttpRequest;                         
@@ -104,6 +92,8 @@ var getAllProductInfo = function(secondFunction) {
   req.send();
   req.addEventListener("load", secondFunction);
 }
+
+// FORMATS EACH PRODUCT IN DATABASE
 
 var formatAllProductInfo = function(eventObject) {
   var results = JSON.parse(this.response) //array of hashes
@@ -121,6 +111,8 @@ var formatAllProductInfo = function(eventObject) {
 
 }
 
+//LOOPS THROUGH PRODUCTS SO YOU CAN PICK NAME AND IT SENDS ID
+
 var productLoop = function(eventObject) {
   var results = JSON.parse(this.response);
   
@@ -133,113 +125,80 @@ var productLoop = function(eventObject) {
   }
 }
 
-
-
-//Definitely can be refactored
+//MAIN TAB FUNCTION
 
 var tabFunction = function(){
+   //array of nav list items (tab buttons)
   
-  //CREATE VARS FOR NAV LINKS
- 
-  //nav unordered list
-  var navlist = document.getElementsByTagName("ul")[0]; 
- 
- 
-  //view list item / link
-  var viewLI = navlist.getElementsByTagName("li")[0];
-  var viewLink = viewLI.getElementsByTagName("a")[0];
-  //create list item / link
-  var createLI = navlist.getElementsByTagName("li")[1];
-  var createLink = createLI.getElementsByTagName("a")[0];
-  //edit list item / link
-  var editLI = navlist.getElementsByTagName("li")[2];
-  var editLink = editLI.getElementsByTagName("a")[0];
-  //delete list item / link
-  var deleteLI = navlist.getElementsByTagName("li")[3];
-  var deleteLink = deleteLI.getElementsByTagName("a")[0];
+  var listItems = [document.getElementById("viewLI"), document.getElementById("editLI"),
+                   document.getElementById("addLI"), document.getElementById("deleteLI")]
   
-  //SET VARS FOR EACH TAB CONTENT
+  //function to change color of active tab button
   
-  var welcome = document.querySelector("#welcome");
-  var viewTab = document.querySelector("#view");
-  var createTab = document.querySelector("#create");
-  var editTab = document.querySelector("#edit");
-  var deleteTab = document.querySelector("#delete");
+  var changColorActiveTabButton = function(activeTab){
+    for (i = 0; i < listItems.length; i++){
+      if (listItems[i] === document.getElementById(activeTab + "LI")){
+        listItems[i].style.backgroundColor = "#FFFFFF";
+      }
+      else {
+        listItems[i].style.backgroundColor = "#B0B0B0";
+      }
+    }
+  }
   
+  //tab contents array
+  
+  var tabContents = [document.querySelector("#welcome"), document.querySelector("#view"), 
+                     document.querySelector("#create"), document.querySelector("#edit"), 
+                     document.querySelector("#delete")]
+
+  //function to display active tab
+  
+  var displayActiveTab = function(activeTab){
+    for (i = 0; i < tabContents.length; i++){
+      if (tabContents[i] === document.querySelector("#" + activeTab)){
+        tabContents[i].style.display = "inline-block";
+      }
+      else {
+        tabContents[i].style.display = "none";
+      }
+    }
+  }
+    
   //START OUT WITH WELCOME SHOWING
   
-  welcome.style.display = "inline-block";
-  viewTab.style.display = "none";
-  editTab.style.display = "none";
-  deleteTab.style.display = "none";
-  createTab.style.display = "none";
+  displayActiveTab("welcome");
   
-  //LOAD EACH TAB ON-CLICK AND RE-HIDE OTHER TABS ---- could I replace all this with just inserting into div the partial ruby code? ala:
-  // var rubyErb = "<%= erb :add_new %>";
-  // document.getElementById("create").innerHTML = rubyErb;
+  //COULD PROBABLY REFACTOR THIS TOO, JUST NEED TO CHANGE #CREATE TO #ADD IN CSS AND HOMEPAGE.ERB
   
   //view
   
-  viewLink.onclick = function(){
+  document.getElementById("viewLink").onclick = function(){
     resetHiddenDivs();
-    viewTab.style.display = "inline-block";
-    editTab.style.display = "none";
-    createTab.style.display = "none";
-    deleteTab.style.display = "none";
-    welcome.style.display = "none";
-    
-    viewLI.style.backgroundColor = "#FFFFFF";    
-    editLI.style.backgroundColor = "#B0B0B0";   
-    createLI.style.backgroundColor = "#B0B0B0";
-    deleteLI.style.backgroundColor = "#B0B0B0"; 
+    displayActiveTab("view");
+    changColorActiveTabButton("view");
   }
   
-  //create
-  createLink.onclick = function(){
-    resetHiddenDivs();   // Cannot figure out how to get it to reset text fields. 
-    
-    createTab.style.display = "inline-block";
-    editTab.style.display = "none";
-    deleteTab.style.display = "none";
-    viewTab.style.display = "none";
-    welcome.style.display = "none";
-
-    createLI.style.backgroundColor = "#FFFFFF"; 
-    editLI.style.backgroundColor = "#B0B0B0";
-    deleteLI.style.backgroundColor = "#B0B0B0";
-    viewLI.style.backgroundColor = "#B0B0B0";
+  //add
+  document.getElementById("addLink").onclick = function(){
+    resetHiddenDivs(); 
+    displayActiveTab("create");
+    changColorActiveTabButton("add");
   }
     
   //edit
     
-  editLink.onclick = function(){
+  document.getElementById("editLink").onclick = function(){
     resetHiddenDivs();
-    editTab.style.display = "inline-block";
-    createTab.style.display = "none";
-    deleteTab.style.display = "none";
-    viewTab.style.display = "none";
-    welcome.style.display = "none";
-    
-    editLI.style.backgroundColor = "#FFFFFF";
-    deleteLI.style.backgroundColor = "#B0B0B0";   
-    createLI.style.backgroundColor = "#B0B0B0";
-    viewLI.style.backgroundColor = "#B0B0B0";      
+    displayActiveTab("edit");
+    changColorActiveTabButton("edit");      
   }
   
   //delete
   
-  deleteLink.onclick = function(){
+  document.getElementById("deleteLink").onclick = function(){
     resetHiddenDivs();
-    
-    deleteTab.style.display = "inline-block";
-    editTab.style.display = "none";
-    createTab.style.display = "none";
-    viewTab.style.display = "none";
-    welcome.style.display = "none";
-    
-    deleteLI.style.backgroundColor = "#FFFFFF";    
-    editLI.style.backgroundColor = "#B0B0B0";   
-    createLI.style.backgroundColor = "#B0B0B0";
-    viewLI.style.backgroundColor = "#B0B0B0";   
+    displayActiveTab("delete");
+    changColorActiveTabButton("delete");    
   }
 }
