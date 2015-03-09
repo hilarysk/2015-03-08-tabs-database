@@ -31,3 +31,10 @@ get "/view" do
   all_products = Product.all
   all_products.to_json
 end
+
+get "/update" do
+end
+
+post "/delete" do
+  Product.delete(params["id"]) #to_i?
+end

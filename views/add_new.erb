@@ -1,0 +1,18 @@
+      <h1>ADD NEW PRODUCT</h1>
+       <div id="newProductFormDiv"><p>Please enter the new product's details below:</p>
+
+       <form action="javascript:void(0)" id="addProductForm">
+  
+         <p><strong>General information:</strong></p></p>
+         <textarea maxlength="300" form="addProductForm" autofocus id="textarea1" required name="general_info" placeholder="(Maximum of 300 characters.)"></textarea>
+         <br><br>
+
+         <p><strong>Where it's sold:</strong></p>
+         <textarea maxlength="300" form="addProductForm" id="textarea2" required name="where_to_buy" placeholder="(Maximum of 300 characters.)"></textarea>
+         <br><br>
+  
+         <p><strong>Technical specifications:</strong></p>
+         <textarea maxlength="300" id="textarea3" form="addProductForm" required name="technical_specs" placeholder="(Maximum of 300 characters.)"></textarea>
+         <br><br>
+         <button onclick="addProduct(productResults)">Add product</button> 
+       </form>

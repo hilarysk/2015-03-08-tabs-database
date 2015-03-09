@@ -223,9 +223,16 @@ class Product
   
   def self.all
     result = DATABASE.execute("SELECT * FROM products")
+    
+    result.each do |hash|
+      hash.keep_if do |key, value|
+        key.is_a?(Integer) == false
+      end
+    end
+    return result
   end
   
-  # Public: delete
+  # Public: self.delete
   # 
   # Deletes a record based on id
   #
@@ -238,7 +245,7 @@ class Product
   # State Changes:
   # None  
   
-  def delete(s_id)
+  def self.delete(s_id)
     DATABASE.execute("DELETE FROM products WHERE id = #{s_id}")
   end
   

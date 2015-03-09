@@ -102,7 +102,9 @@ body {
   padding-bottom: 10px;
 }
 
-
+.errornote {
+  color: #C80000;
+}
 
 
 

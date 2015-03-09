@@ -24,24 +24,7 @@
     </div>
 
     <div id="create" class="tab_content">
-      <h1>ADD NEW PRODUCT</h1>
-       <div id="newProductFormDiv"><p>Please enter the new product's details below:</p>
-
-       <form action="javascript:void(0)" id="addProductForm">
-  
-         <p><strong>General information:</strong></p></p>
-         <textarea maxlength="300" form="addProductForm" autofocus id="textarea1" required name="general_info" placeholder="(Maximum of 300 characters.)"></textarea>
-         <br><br>
-
-         <p><strong>Where it's sold:</strong></p>
-         <textarea maxlength="300" form="addProductForm" id="textarea2" required name="where_to_buy" placeholder="(Maximum of 300 characters.)"></textarea>
-         <br><br>
-  
-         <p><strong>Technical specifications:</strong></p>
-         <textarea maxlength="300" id="textarea3" form="addProductForm" required name="technical_specs" placeholder="(Maximum of 300 characters.)"></textarea>
-         <br><br>
-         <button onclick="addProduct()">Add product</button> 
-       </form>
+      <%= erb :add_new %>
      </div>
        
        <div id="create_result" display="none">
@@ -66,8 +49,9 @@
     </div>
 
     <div id="delete" class="tab_content">
-      <h1>DELETE A PRODUCT</h1>
-      <p>stuff that would go on erb for delete goes here</p>
+      <%= erb :delete_prod %>
+      <div id="delete_result" display="none">
+      </div>
     </div>
 
   </div>
