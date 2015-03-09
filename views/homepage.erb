@@ -20,14 +20,7 @@
     </div>
 
     <div id="view" class="tab_content">
-      <h1>VIEW PRODUCTS</h1>
-      <% @all_products.each do |product| %>
-      <ul>
-        <li><strong>Product information:</strong> <%= product["general_info"] %></li>
-        <li><strong>Where it's sold:</strong> <%= product["where_to_buy"] %></li>
-        <li><strong>Technical specs:</strong> <%= product["technical_specs"] %></li>
-      </ul>
-      <% end %>
+      <%= erb :view_all %>
     </div>
 
     <div id="create" class="tab_content">
@@ -37,15 +30,15 @@
        <form action="javascript:void(0)" id="addProductForm">
   
          <p><strong>General information:</strong></p></p>
-         <textarea maxlength="300" form="addProductForm" autofocus required name="general_info" placeholder="(Maximum of 300 characters.)"></textarea>
+         <textarea maxlength="300" form="addProductForm" autofocus id="textarea1" required name="general_info" placeholder="(Maximum of 300 characters.)"></textarea>
          <br><br>
 
          <p><strong>Where it's sold:</strong></p>
-         <textarea maxlength="300" form="addProductForm" required name="where_to_buy" placeholder="(Maximum of 300 characters.)"></textarea>
+         <textarea maxlength="300" form="addProductForm" id="textarea2" required name="where_to_buy" placeholder="(Maximum of 300 characters.)"></textarea>
          <br><br>
   
          <p><strong>Technical specifications:</strong></p>
-         <textarea maxlength="300" id="testingTextArea" form="addProductForm" required name="technical_specs" placeholder="(Maximum of 300 characters.)"></textarea>
+         <textarea maxlength="300" id="textarea3" form="addProductForm" required name="technical_specs" placeholder="(Maximum of 300 characters.)"></textarea>
          <br><br>
          <button onclick="addProduct()">Add product</button> 
        </form>

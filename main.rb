@@ -7,7 +7,6 @@ require_relative "database/database_setup.rb"
 require_relative "models/product_class.rb"
 
 get "/home" do 
-  @all_products = Product.all
   erb :homepage
 end
 
@@ -26,4 +25,9 @@ post "/create" do
     np_hash[:worked] = "yes" 
     return np_hash.to_json
   end  
+end
+
+get "/view" do 
+  all_products = Product.all
+  all_products.to_json
 end

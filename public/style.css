@@ -98,7 +98,9 @@ body {
 }
 
 
-
+.allproductsview li {
+  padding-bottom: 10px;
+}
 
 
 

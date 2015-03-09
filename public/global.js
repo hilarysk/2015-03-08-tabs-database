@@ -11,7 +11,7 @@ window.onload = function() {
 // FUNCTIONS //
 ///////////////
                                                                       
-var addProduct = function() {                                         
+var addProduct = function() {   
   var productInfo = document.getElementById("addProductForm");         
   var req = new XMLHttpRequest;                         
   req.open("post", "http://localhost:4567/create");                    
@@ -22,7 +22,7 @@ var addProduct = function() {
                                                                       
 var productResults = function(eventObject) {                                          
   var product = JSON.parse(this.response);
-     //says undefined when error, so some issue with parsing this.response? don't need to parse? not sure.
+     //says undefined when error, so some issue with parsing this.response when hash with arrays as values? don't need to parse? not sure.
   document.getElementById("create_result").style.display = "block";
   
   if (product.worked === "yes") {
@@ -36,26 +36,30 @@ var productResults = function(eventObject) {
   
   if (product.worked != "yes") {
     document.getElementById("create_message").innerHTML = this.response;
+    document.getElementById("newProductFormDiv").style.display = "none";
+ 
     //Can separate this out into function with argument of tech_spec vs. general_info etc.
     
-    for (i = 0; i < product.technical_specs.length; i ++){
-      var errors = document.createElement("p");
-      var techSpecError = product.technical_specs[i];
-      errors.innerHTML = techSpecError;
-      document.getElementById("create_message").appendChild(errors);
-    }
-    for (i = 0; i < product.general_info.length; i ++){
-      var errors = document.createElement("p");
-      var genInfoError = product.general_info[i] + "<br>";
-      errors.innerHTML = genInfoError;
-      document.getElementById("create_message").appendChild(errors);
-    }
-    for (i = 0; i < product.where_to_buy.length; i ++){
-      var errors = document.createElement("p");
-      var whereBuyError = product.technical_specs[i] + "<br>";
-      errors.innerHTML = whereBuyError;
-      document.getElementById("create_message").appendChild(errors);
-    }
+    
+    //THIS ISN'T WORKING BECAUSE CAN'T PARSE ERROR HASH
+    // for (i = 0; i < product.technical_specs.length; i ++){
+ //      var errors = document.createElement("p");
+ //      var techSpecError = product.technical_specs[i];
+ //      errors.innerHTML = techSpecError;
+ //      document.getElementById("create_message").appendChild(errors);
+ //    }
+ //    for (i = 0; i < product.general_info.length; i ++){
+ //      var errors = document.createElement("p");
+ //      var genInfoError = product.general_info[i] + "<br>";
+ //      errors.innerHTML = genInfoError;
+ //      document.getElementById("create_message").appendChild(errors);
+ //    }
+ //    for (i = 0; i < product.where_to_buy.length; i ++){
+ //      var errors = document.createElement("p");
+ //      var whereBuyError = product.technical_specs[i] + "<br>";
+ //      errors.innerHTML = whereBuyError;
+ //      document.getElementById("create_message").appendChild(errors);
+ //    }
   }
 }
 
@@ -64,10 +68,34 @@ var resetHiddenDivs = function() {
   document.getElementById("product_info").style.display = "none";
   document.getElementById("create_result").style.display = "none";
   document.getElementById("newProductFormDiv").style.display = "block";
-  
-  
-  //add more as necessary, like from edit
+  document.getElementById("textarea1").innerHTML = "";
+  document.getElementById("textarea2").innerHTML = "";
+  document.getElementById("textarea3").innerHTML = "";
 }
+
+var getAllProductInfo = function() {
+  var req = new XMLHttpRequest;                         
+  req.open("get", "http://localhost:4567/view");                    
+  req.send();
+  req.addEventListener("load", formatAllProductInfo);
+}
+
+var formatAllProductInfo = function(eventObject) {
+  var results = JSON.parse(this.response) //array of hashes
+  
+  for (i = 0; i < results.length; i ++){
+    var list = document.createElement("li");
+    var formattedProductInfo = "<strong>General information: </strong>" + results[i].general_info + 
+                               "<br><strong>Where it's sold: </strong>" + results[i].where_to_buy +
+                               "<br><strong>Technical specifications: </strong>" + results[i].technical_specs;
+                                
+    list.innerHTML = formattedProductInfo;
+    
+    document.getElementById("allProductsGoHere").appendChild(list);
+  }
+
+}
+
 
 
 //Definitely can be refactored
@@ -123,12 +151,14 @@ var tabFunction = function(){
     viewLI.style.backgroundColor = "#FFFFFF";    
     editLI.style.backgroundColor = "#B0B0B0";   
     createLI.style.backgroundColor = "#B0B0B0";
-    deleteLI.style.backgroundColor = "#B0B0B0";   
+    deleteLI.style.backgroundColor = "#B0B0B0"; 
+    
+    getAllProductInfo();
   }
   
   //create
   createLink.onclick = function(){
-    resetHiddenDivs()
+    resetHiddenDivs();   // Cannot figure out how to get it to reset text fields. 
     
     createTab.style.display = "inline-block";
     editTab.style.display = "none";
