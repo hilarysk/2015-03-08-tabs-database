@@ -97,7 +97,7 @@ var getAllProductInfo = function(secondFunction) {
 
 var formatAllProductInfo = function(eventObject) {
   var results = JSON.parse(this.response) //array of hashes
-  
+  console.log(results);
   for (i = 0; i < results.length; i ++){
     var list = document.createElement("li");
     var formattedProductInfo = "<strong>General information: </strong>" + results[i].general_info + 
