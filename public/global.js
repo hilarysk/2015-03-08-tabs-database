@@ -29,7 +29,7 @@ var deleteProductResults = function() {
 var addProduct = function(secondFunction) {   
   var productInfo = document.getElementById("addProductForm");         
   var req = new XMLHttpRequest;                         
-  req.open("post", "http://localhost:4567/create");                    
+  req.open("post", "http://localhost:4567/add");                  
   req.send(new FormData(productInfo));
   req.addEventListener("load", secondFunction);                       
 }    
@@ -47,7 +47,7 @@ var findErrorMessages = function(key, parsedResponse) {
                                                                       
 var productResults = function(eventObject) {                                         
   var product = JSON.parse(this.response);
-     //says undefined when error, so some issue with parsing this.response when hash with arrays as values? don't need to parse? not sure.
+
   document.getElementById("create_result").style.display = "block";
   
   if (product.worked === "yes") {
@@ -138,10 +138,13 @@ var tabFunction = function(){
   var changColorActiveTabButton = function(activeTab){
     for (i = 0; i < listItems.length; i++){
       if (listItems[i] === document.getElementById(activeTab + "LI")){
-        listItems[i].style.backgroundColor = "#FFFFFF";
+        listItems[i].style.backgroundColor = "rgba(255, 255, 255, 0.9)";
+        document.getElementById(activeTab + "Link").style.color = "#000000";
+        
       }
       else {
-        listItems[i].style.backgroundColor = "#B0B0B0";
+        listItems[i].style.backgroundColor = "rgba(156, 0, 21, 0.9)";
+        document.getElementById(activeTab + "Link").style.color = "#000000";
       }
     }
   }
@@ -149,7 +152,7 @@ var tabFunction = function(){
   //tab contents array
   
   var tabContents = [document.querySelector("#welcome"), document.querySelector("#view"), 
-                     document.querySelector("#create"), document.querySelector("#edit"), 
+                     document.querySelector("#add"), document.querySelector("#edit"), 
                      document.querySelector("#delete")]
 
   //function to display active tab
@@ -169,7 +172,7 @@ var tabFunction = function(){
   
   displayActiveTab("welcome");
   
-  //COULD PROBABLY REFACTOR THIS TOO, JUST NEED TO CHANGE #CREATE TO #ADD IN CSS AND HOMEPAGE.ERB
+  //COULD PROBABLY REFACTOR THIS TOO
   
   //view
   
@@ -182,7 +185,7 @@ var tabFunction = function(){
   //add
   document.getElementById("addLink").onclick = function(){
     resetHiddenDivs(); 
-    displayActiveTab("create");
+    displayActiveTab("add");
     changColorActiveTabButton("add");
   }
     

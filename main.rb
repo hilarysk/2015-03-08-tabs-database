@@ -10,7 +10,7 @@ get "/home" do
   erb :homepage
 end
 
-post "/create" do 
+post "/add" do 
   new_product = Product.new({"general_info"=>"#{params["general_info"]}", 
                             "technical_specs"=>"#{params["technical_specs"]}",
                             "where_to_buy"=>"#{params["where_to_buy"]}"})

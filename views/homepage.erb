@@ -1,12 +1,33 @@
+<!--
+
+ HOVER STOPS WORKING PROPERLY ONCE YOU THE JAVASCRIPT KICKS IN
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="bg">
+  <img src="/background.jpg" alt="">
+</div>
 <div class="wholething">
   <div class="blackbehindnav">
     <div class="nav">
       <nav>
         <ul>
-          <li id="viewLI"><a id="viewLink" href="javascript:void(0)">VIEW PRODUCTS</a></li>
-          <li id="addLI"><a id="addLink" href="javascript:void(0)">ADD NEW PRODUCT</a></li>
-          <li id="editLI"><a id="editLink" href="javascript:void(0)">EDIT A PRODUCT</a></li>
-          <li id="deleteLI" class="norightpadding"><a id="deleteLink" href="javascript:void(0)">DELETE A PRODUCT</a></li>
+          <li id="viewLI"><a id="viewLink" href="javascript:void(0)"><p>VIEW PRODUCTS</p></a></li>
+          <li id="addLI"><a id="addLink" href="javascript:void(0)"><p>ADD NEW PRODUCT</p></a></li>
+          <li id="editLI"><a id="editLink" href="javascript:void(0)"><p>EDIT PRODUCT</p></a></li>
+          <li id="deleteLI"><a id="deleteLink" href="javascript:void(0)"><p>DELETE PRODUCT</p></a></li>
         </ul>
       </nav>
     </div>
@@ -15,26 +36,32 @@
   <div id="contents"> 
     
     <div id="welcome" class="tab_content">
-      <h1>Welcome!</h1>
-      <p>To manage inventory, please click one of the tabs above.</p>
+      <div class="tab_text">
+        <h1 align="center">Welcome!</h1>
+        <p>To manage inventory, please click one of the tabs above.</p>
+      </div>
     </div>
 
     <div id="view" class="tab_content">
       <%= erb :view_all %>
     </div>
 
-    <div id="create" class="tab_content">
-      <%= erb :add_new %>
+    <div id="add" class="tab_content">
+      <div class="tab_text">
+        <%= erb :add_new %>
+      </div>
      </div>
        
        <div id="create_result" display="none">
-         <p id="create_message"></p>
-         <div id="product_info" display="none">
-           <ul>
-             <li><strong>General information:</strong> <span id="general_info"></span></li>
-             <li><strong>Where it's sold:</strong> <span id="where_to_buy"></span></li>
-             <li><strong>Technical specifications:</strong> <span id="technical_specs"></span></li>
-           </ul>
+         <div class="tab_text">
+           <p id="create_message"></p>
+           <div id="product_info" display="none">
+             <ul>
+               <li><strong>General information:</strong> <span id="general_info"></span></li>
+               <li><strong>Where it's sold:</strong> <span id="where_to_buy"></span></li>
+               <li><strong>Technical specifications:</strong> <span id="technical_specs"></span></li>
+             </ul>
+           </div>
          </div>
        </div>
        
@@ -43,14 +70,19 @@
     
 
     <div id="edit" class="tab_content">
-      <h1>EDIT A PRODUCT</h1>
+      <div class="tab_text">
+      
+        <h1>EDIT A PRODUCT</h1>
   
-      <p>stuff that would go on erb for edit goes here</p>
+        <p>stuff that would go on erb for edit goes here</p>
+      </div>
     </div>
 
     <div id="delete" class="tab_content">
-      <%= erb :delete_prod %>
-      <div id="delete_result" display="none">
+      <div class="tab_text">
+        <%= erb :delete_prod %>
+        <div id="delete_result" display="none">
+        </div>
       </div>
     </div>
 
