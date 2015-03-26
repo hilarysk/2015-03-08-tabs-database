@@ -1,21 +1,3 @@
-<!--
-
- HOVER STOPS WORKING PROPERLY ONCE YOU THE JAVASCRIPT KICKS IN
- -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div id="bg">
   <img src="/background.jpg" alt="">
 </div>
@@ -24,10 +6,29 @@
     <div class="nav">
       <nav>
         <ul>
-          <li id="viewLI"><a id="viewLink" href="javascript:void(0)"><p>VIEW PRODUCTS</p></a></li>
-          <li id="addLI"><a id="addLink" href="javascript:void(0)"><p>ADD NEW PRODUCT</p></a></li>
-          <li id="editLI"><a id="editLink" href="javascript:void(0)"><p>EDIT PRODUCT</p></a></li>
-          <li id="deleteLI"><a id="deleteLink" href="javascript:void(0)"><p>DELETE PRODUCT</p></a></li>
+          <li id="viewLI" class="tab inactive">
+            <a id="viewLink" class="inactiveLink" href="javascript:void(0)">
+              <p>VIEW PRODUCTS
+              </p>
+            </a>
+          </li>
+          <li id="addLI" class="tab inactive">
+            <a id="addLink" class="inactiveLink" href="javascript:void(0)">
+              <p>ADD NEW PRODUCT
+              </p>
+            </a>
+          </li>
+          <li id="editLI" class="tab inactive">
+            <a id="editLink" class="inactiveLink" href="javascript:void(0)">
+              <p>EDIT PRODUCT
+              </p>
+            </a>
+          </li>
+          <li id="deleteLI" class="tab inactive">
+            <a id="deleteLink" class="inactiveLink" href="javascript:void(0)">
+              <p>DELETE PRODUCT</p>
+            </a>
+          </li>
         </ul>
       </nav>
     </div>
@@ -38,12 +39,14 @@
     <div id="welcome" class="tab_content">
       <div class="tab_text">
         <h1 align="center">Welcome!</h1>
-        <p>To manage inventory, please click one of the tabs above.</p>
+        <p>To manage inventory, please click one of the tabs.</p>
       </div>
     </div>
 
     <div id="view" class="tab_content">
-      <%= erb :view_all %>
+      <div class="tab_text">
+        <%= erb :view_all %>
+      </div>
     </div>
 
     <div id="add" class="tab_content">

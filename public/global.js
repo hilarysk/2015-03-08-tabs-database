@@ -96,8 +96,7 @@ var getAllProductInfo = function(secondFunction) {
 // FORMATS EACH PRODUCT IN DATABASE
 
 var formatAllProductInfo = function(eventObject) {
-  var results = JSON.parse(this.response) //array of hashes
-  console.log(results);
+  var results = JSON.parse(this.response); //array of hashes
   for (i = 0; i < results.length; i ++){
     var list = document.createElement("li");
     var formattedProductInfo = "<strong>General information: </strong>" + results[i].general_info + 
@@ -133,18 +132,24 @@ var tabFunction = function(){
   var listItems = [document.getElementById("viewLI"), document.getElementById("editLI"),
                    document.getElementById("addLI"), document.getElementById("deleteLI")]
   
-  //function to change color of active tab button
+  //function to changee color of active tab button
   
-  var changColorActiveTabButton = function(activeTab){
+  var changeColorActiveTabButton = function(activeTab){
     for (i = 0; i < listItems.length; i++){
       if (listItems[i] === document.getElementById(activeTab + "LI")){
-        listItems[i].style.backgroundColor = "rgba(255, 255, 255, 0.9)";
-        document.getElementById(activeTab + "Link").style.color = "#000000";
-        
+        // listItems[i].style.backgroundColor = "rgba(255, 255, 255, 0.9)";
+//         document.getElementById(activeTab + "Link").style.color = "#000000";
+          listItems[i].className = "tab active"
+          document.getElementById(activeTab + "Link").className = "activeLink"
       }
       else {
-        listItems[i].style.backgroundColor = "rgba(156, 0, 21, 0.9)";
-        document.getElementById(activeTab + "Link").style.color = "#000000";
+        // listItems[i].style.backgroundColor = "rgba(156, 0, 21, 0.9)";
+        // document.getElementById(activeTab + "Link").style.color = "#000000";
+          listItems[i].className = "tab inactive"
+          document.getElementById(activeTab + "Link").className = "inactiveLink"
+        
+        
+        
       }
     }
   }
@@ -179,14 +184,14 @@ var tabFunction = function(){
   document.getElementById("viewLink").onclick = function(){
     resetHiddenDivs();
     displayActiveTab("view");
-    changColorActiveTabButton("view");
+    changeColorActiveTabButton("view");
   }
   
   //add
   document.getElementById("addLink").onclick = function(){
     resetHiddenDivs(); 
     displayActiveTab("add");
-    changColorActiveTabButton("add");
+    changeColorActiveTabButton("add");
   }
     
   //edit
@@ -194,7 +199,7 @@ var tabFunction = function(){
   document.getElementById("editLink").onclick = function(){
     resetHiddenDivs();
     displayActiveTab("edit");
-    changColorActiveTabButton("edit");      
+    changeColorActiveTabButton("edit");      
   }
   
   //delete
@@ -202,6 +207,6 @@ var tabFunction = function(){
   document.getElementById("deleteLink").onclick = function(){
     resetHiddenDivs();
     displayActiveTab("delete");
-    changColorActiveTabButton("delete");    
+    changeColorActiveTabButton("delete");    
   }
 }
