@@ -137,19 +137,10 @@ var tabFunction = function(){
   var changeColorActiveTabButton = function(activeTab){
     for (i = 0; i < listItems.length; i++){
       if (listItems[i] === document.getElementById(activeTab + "LI")){
-        // listItems[i].style.backgroundColor = "rgba(255, 255, 255, 0.9)";
-//         document.getElementById(activeTab + "Link").style.color = "#000000";
-          listItems[i].className = "tab active"
-          document.getElementById(activeTab + "Link").className = "activeLink"
+          listItems[i].className = "tab active";
       }
       else {
-        // listItems[i].style.backgroundColor = "rgba(156, 0, 21, 0.9)";
-        // document.getElementById(activeTab + "Link").style.color = "#000000";
-          listItems[i].className = "tab inactive"
-          document.getElementById(activeTab + "Link").className = "inactiveLink"
-        
-        
-        
+        listItems[i].className = "tab inactive";
       }
     }
   }
