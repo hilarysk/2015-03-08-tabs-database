@@ -45,13 +45,32 @@
 
     <div id="view" class="tab_content">
       <div class="tab_text">
-        <%= erb :view_all %>
+        <h1 align="center">VIEW PRODUCTS</h1>
+        <ol id="allProductsGoHere" class="allproductsview">
+        </ol>
       </div>
     </div>
 
     <div id="add" class="tab_content">
       <div class="tab_text">
-        <%= erb :add_new %>
+        <h1 align="center">ADD NEW PRODUCT</h1>
+         <div id="newProductFormDiv"><p>Please enter the new product's details below:</p>
+
+         <form action="javascript:void(0)" id="addProductForm" width="100%">
+  
+           <p><strong>General information:</strong></p></p>
+           <textarea maxlength="300" form="addProductForm" autofocus id="textarea1" required name="general_info" placeholder="(Maximum of 300 characters.)" style:"width:50%"></textarea>
+           <br><br>
+
+           <p><strong>Where it's sold:</strong></p>
+           <textarea maxlength="300" form="addProductForm" id="textarea2" required name="where_to_buy" placeholder="(Maximum of 300 characters.)"></textarea>
+           <br><br>
+  
+           <p><strong>Technical specifications:</strong></p>
+           <textarea maxlength="300" id="textarea3" form="addProductForm" required name="technical_specs" placeholder="(Maximum of 300 characters.)"></textarea>
+           <br><br>
+           <button onclick="addProduct(productResults)">Add product</button> 
+         </form>
       </div>
      </div>
        
@@ -77,13 +96,20 @@
       
         <h1 align="center">EDIT A PRODUCT</h1>
   
-        <p>stuff that would go on erb for edit goes here</p>
+        <p>Create form with submit button that isn't clickable?</p>
       </div>
     </div>
 
     <div id="delete" class="tab_content">
       <div class="tab_text">
-        <%= erb :delete_prod %>
+      <h1 align="center">DELETE A PRODUCT</h1>
+      <div id="deleteDropdown"><p>Please select the product you'd like to delete:</p>
+        <form action="javascript:void(0)" id="deleteProductForm">
+          <select name="id" id="selectDelete">
+          </select>
+          <button onclick="deleteProduct()">Delete product</button>
+        </form>
+      </div>
         <div id="delete_result" display="none">
         </div>
       </div>

@@ -170,34 +170,46 @@ var tabFunction = function(){
   
   //COULD PROBABLY REFACTOR THIS TOO
   
-  //view
+  // var mainTabFunction = function(tab){
+  //   resetHiddenDivs();
+  //   displayActiveTab(tab;
+  //   changeColorActiveTabButton(tab);
+  // }
+  //
+  // document.getElementById("viewLink").onclick = mainTabFunction("view");
+  // document.getElementById("addLink").onclick = mainTabFunction("add");
+  // document.getElementById("editLink").onclick = mainTabFunction("edit");
+  // document.getElementById("deleteLink").onclick = mainTabFunction("delete");
+
   
+  //view
+
   document.getElementById("viewLink").onclick = function(){
     resetHiddenDivs();
     displayActiveTab("view");
     changeColorActiveTabButton("view");
   }
-  
+
   //add
   document.getElementById("addLink").onclick = function(){
-    resetHiddenDivs(); 
+    resetHiddenDivs();
     displayActiveTab("add");
     changeColorActiveTabButton("add");
   }
-    
+
   //edit
-    
+
   document.getElementById("editLink").onclick = function(){
     resetHiddenDivs();
     displayActiveTab("edit");
-    changeColorActiveTabButton("edit");      
+    changeColorActiveTabButton("edit");
   }
-  
+
   //delete
-  
+
   document.getElementById("deleteLink").onclick = function(){
     resetHiddenDivs();
     displayActiveTab("delete");
-    changeColorActiveTabButton("delete");    
+    changeColorActiveTabButton("delete");
   }
 }
