@@ -46,6 +46,18 @@
     <div id="view" class="tab_content">
       <div class="tab_text">
         <h1 align="center">VIEW PRODUCTS</h1>
+         <p><strong>Placeholder list</strong></p>
+         <ol> 
+          <li>Caverna</li>
+          <li>Seven Wonders</li>
+          <li>King of Tokyo</li>
+          <li>Netrunner</li>
+          <li>Risk Legacy</li>
+          <li>Slap .45</li>
+          <li>Lords of Waterdeep</li>
+          <li>Dominion</li>
+          <li>Takenoko</li>
+        </ol>
         <ol id="allProductsGoHere" class="allproductsview">
         </ol>
       </div>
@@ -59,17 +71,17 @@
          <form action="javascript:void(0)" id="addProductForm" width="100%">
   
            <p><strong>General information:</strong></p></p>
-           <textarea maxlength="300" form="addProductForm" autofocus id="textarea1" required name="general_info" placeholder="(Maximum of 300 characters.)" style:"width:50%"></textarea>
+           <textarea maxlength="300" form="addProductForm" autofocus id="textarea1" name="general_info" placeholder="(Maximum of 300 characters.)" style:"width:50%"></textarea>
            <br><br>
 
            <p><strong>Where it's sold:</strong></p>
-           <textarea maxlength="300" form="addProductForm" id="textarea2" required name="where_to_buy" placeholder="(Maximum of 300 characters.)"></textarea>
+           <textarea maxlength="300" form="addProductForm" id="textarea2" name="where_to_buy" placeholder="(Maximum of 300 characters.)"></textarea>
            <br><br>
   
            <p><strong>Technical specifications:</strong></p>
-           <textarea maxlength="300" id="textarea3" form="addProductForm" required name="technical_specs" placeholder="(Maximum of 300 characters.)"></textarea>
+           <textarea maxlength="300" id="textarea3" form="addProductForm" name="technical_specs" placeholder="(Maximum of 300 characters.)"></textarea>
            <br><br>
-           <button onclick="addProduct(productResults)">Add product</button> 
+           <button>Add product</button> 
          </form>
       </div>
      </div>
@@ -96,7 +108,24 @@
       
         <h1 align="center">EDIT A PRODUCT</h1>
   
-        <p>Create form with submit button that isn't clickable?</p>
+           <div id="newProductFormDiv"><p>Please edit the product's information:</p>
+
+           <form action="javascript:void(0)" id="addProductForm" width="100%">
+  
+             <p><strong>General information:</strong></p></p>
+             <textarea maxlength="300" form="addProductForm" autofocus id="textarea1" name="general_info" placeholder="(Maximum of 300 characters.)" style:"width:50%"></textarea>
+             <br><br>
+
+             <p><strong>Where it's sold:</strong></p>
+             <textarea maxlength="300" form="addProductForm" id="textarea2" name="where_to_buy" placeholder="(Maximum of 300 characters.)"></textarea>
+             <br><br>
+  
+             <p><strong>Technical specifications:</strong></p>
+             <textarea maxlength="300" id="textarea3" form="addProductForm" name="technical_specs" placeholder="(Maximum of 300 characters.)"></textarea>
+             <br><br>
+             <button>Edit product</button> 
+           </form>
+        </div>
       </div>
     </div>
 
@@ -107,7 +136,7 @@
         <form action="javascript:void(0)" id="deleteProductForm">
           <select name="id" id="selectDelete">
           </select>
-          <button onclick="deleteProduct()">Delete product</button>
+          <button>Delete product</button>
         </form>
       </div>
         <div id="delete_result" display="none">
