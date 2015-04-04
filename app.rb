@@ -2,6 +2,6 @@ require "pry"
 require "json"
 require "sinatra"
 
-get "/home" do 
+get "/" do 
   erb :homepage
 end
